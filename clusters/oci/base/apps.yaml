@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: core
   path: ./clusters/oci/apps
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
