@@ -4,3 +4,4 @@ resources:
   - default
   - kube-system
   - system-upgrade
+  - networking
