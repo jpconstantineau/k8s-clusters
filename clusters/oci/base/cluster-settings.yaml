@@ -6,3 +6,4 @@ metadata:
   namespace: flux-system
 data:
   SECRET_DOMAIN: oci.jpto.dev
+  SVC_TRAEFIK_ADDR: 10.0.0.235
