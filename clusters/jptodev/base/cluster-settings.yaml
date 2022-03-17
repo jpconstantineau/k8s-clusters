@@ -7,4 +7,5 @@ metadata:
 data:
   SECRET_DOMAIN: jpto.dev
   SECRET_DOMAIN2: jpconstantineau.com
-  SVC_TRAEFIK_ADDR: 10.0.0.235
+  SECRET_DOMAIN3: 141-148-144-82.nip.io
+  SVC_TRAEFIK_ADDR: 141.148.144.82
