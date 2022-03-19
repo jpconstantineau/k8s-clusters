@@ -23,7 +23,7 @@ spec:
         command:
         - sh
         - -c
-        - - git clone --branch store --single-branch https://github.com/jpconstantineau/jpconstantineau-web.git /tmp && rm -rf /tmp/.git
+        - git clone --branch store --single-branch https://github.com/jpconstantineau/jpconstantineau-web.git /tmp && rm -rf /tmp/.git
       containers:
       - name: nginx
         image: nginx:1.14.2
