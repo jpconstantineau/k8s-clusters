@@ -1,50 +1,50 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: store-nginx
+  name: mechmarket-nginx
   namespace: default
   labels:
-    app: store-nginx
+    app: mechmarket-nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: store-nginx
+      app: mechmarket-nginx
   template:
     metadata:
       labels:
-        app: store-nginx
+        app: mechmarket-nginx
     spec:
       initContainers:
       - name: busybox
         image: alpine/git
         volumeMounts:
-          - name: store-html-volume
+          - name: mechmarket-html-volume
             mountPath: /tmp
         command:
         - sh
         - -c
-        - git clone --branch store --single-branch https://github.com/jpconstantineau/jpconstantineau-web.git /tmp && rm -rf /tmp/.git
+        - git clone --branch mechmarket --single-branch https://github.com/jpconstantineau/jpconstantineau-web.git /tmp && rm -rf /tmp/.git
       containers:
       - name: nginx
         image: nginx:1.14.2
         ports:
         - containerPort: 80
         volumeMounts:
-          - name: store-html-volume
+          - name: mechmarket-html-volume
             mountPath: /usr/share/nginx/html
       volumes:
-      - name: store-html-volume
+      - name: mechmarket-html-volume
         emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: store-nginx-service
+  name: mechmarket-nginx-service
   namespace: default
 spec:
   selector:
-    app: store-nginx
+    app: mechmarket-nginx
   ports:
     - protocol: TCP
       port: 80
@@ -52,29 +52,29 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: store-nginx-ingress
+  name: mechmarket-nginx-ingress
   namespace: default
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-  - host: "store.129-153-66-137.nip.io"
+  - host: "mechmarket.129-153-66-137.nip.io"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: store-nginx-service
+            name: mechmarket-nginx-service
             port:
               number: 80
-  - host: "store.jpconstantineau.com"
+  - host: "mechmarket.jpconstantineau.com"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: store-nginx-service
+            name: mechmarket-nginx-service
             port:
               number: 80
