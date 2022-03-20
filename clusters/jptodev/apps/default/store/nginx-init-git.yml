@@ -56,6 +56,7 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
   rules:
   - host: "store.129-153-66-137.nip.io"
@@ -78,3 +79,7 @@ spec:
             name: store-nginx-service
             port:
               number: 80
+  tls:
+  - hosts: 
+    - store.jpconstantineau.com
+    secretName: store-jpconstantineau-tls-production
