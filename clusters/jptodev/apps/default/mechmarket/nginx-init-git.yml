@@ -78,3 +78,7 @@ spec:
             name: mechmarket-nginx-service
             port:
               number: 80
+  tls:
+  - hosts: 
+    - mechmarket.jpconstantineau.com
+    secretName: mechmarket-jpconstantineau-tls-production
