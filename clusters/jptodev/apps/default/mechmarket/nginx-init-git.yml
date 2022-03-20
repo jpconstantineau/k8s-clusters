@@ -56,18 +56,11 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+
 spec:
   rules:
-  - host: "mechmarket.129-153-66-137.nip.io"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: mechmarket-nginx-service
-            port:
-              number: 80
   - host: "mechmarket.jpconstantineau.com"
     http:
       paths:

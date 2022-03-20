@@ -60,16 +60,6 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
   rules:
-  - host: "store.129-153-66-137.nip.io"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: store-nginx-service
-            port:
-              number: 80
   - host: "store.jpconstantineau.com"
     http:
       paths:
