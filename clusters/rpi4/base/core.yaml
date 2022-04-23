@@ -8,7 +8,7 @@ spec:
   interval: 10m0s
   dependsOn:
     - name: crds
-  path: ./clusters/talos-rpi4/core
+  path: ./clusters/rpi4/core
   prune: false
   sourceRef:
     kind: GitRepository

@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/talos-rpi4/crds
+  path: ./clusters/rpi4/crds
   prune: false
   sourceRef:
     kind: GitRepository
