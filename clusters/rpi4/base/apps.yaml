@@ -8,7 +8,7 @@ spec:
   interval: 10m0s
   dependsOn:
     - name: core
-  path: ./clusters/talos-rpi4/apps
+  path: ./clusters/rpi4/apps
   prune: true
   sourceRef:
     kind: GitRepository
