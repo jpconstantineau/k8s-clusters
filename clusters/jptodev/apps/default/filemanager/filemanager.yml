@@ -15,6 +15,16 @@ spec:
       labels:
         app: filemanager
     spec:
+      initContainers:
+      - name: busybox
+        image: alpine/git
+        volumeMounts:
+          - name: filemanager-json-volume
+            mountPath: /tmp
+        command:
+        - sh
+        - -c
+        - touch .filebrowser.json
       containers:
       - name: filemanager
         image:  filebrowser/filebrowser
