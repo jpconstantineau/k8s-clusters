@@ -16,7 +16,7 @@ spec:
         app: filemanager
     spec:
       initContainers:
-      - name: busybox
+      - name: busybox-json
         image: alpine/git
         volumeMounts:
           - name: filemanager-json-volume
@@ -25,7 +25,7 @@ spec:
         - sh
         - -c
         - touch /tmp/.filebrowser.json
-      - name: busybox
+      - name: busybox-database
         image: alpine/git
         volumeMounts:
           - name: filemanager-database-volume
