@@ -24,7 +24,7 @@ spec:
         command:
         - sh
         - -c
-        - touch .filebrowser.json
+        - touch /tmp/.filebrowser.json
       containers:
       - name: filemanager
         image:  filebrowser/filebrowser
