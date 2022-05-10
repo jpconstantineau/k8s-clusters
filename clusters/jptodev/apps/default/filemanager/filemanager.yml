@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filemanager
+  namespace: default
+  labels:
+    app: filemanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filemanager
+  template:
+    metadata:
+      labels:
+        app: filemanager
+    spec:
+      containers:
+      - name: filemanager
+        image:  filebrowser/filebrowser
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: filemanager-data-volume
+            mountPath: /srv
+          - name: filemanager-database-volume
+            mountPath: /database.db  
+          - name: filemanager-json-volume
+            mountPath: /.filebrowser.json
+      volumes:
+      - name: filemanager-data-volume
+        emptyDir: {}
+      - name: filemanager-database-volume
+        emptyDir: {}
+      - name: filemanager-json-volume
+        emptyDir: {}          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: filemanager-service
+  namespace: default
+spec:
+  selector:
+    app: filemanager
+  ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: filemanager-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    #traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  rules:
+  - host: "fm.jpto.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: filemanager-service
+            port:
+              number: 8080
+  tls:
+  - hosts: 
+    - fm.jpto.dev
+    secretName: fm-jpto-tls-production
