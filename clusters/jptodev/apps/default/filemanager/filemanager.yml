@@ -16,15 +16,6 @@ spec:
         app: filemanager
     spec:
       initContainers:
-      - name: busybox-json
-        image: alpine/git
-        volumeMounts:
-          - name: filemanager-json-volume
-            mountPath: /tmp
-        command:
-        - sh
-        - -c
-        - touch /tmp/.filebrowser.json
       - name: busybox-database
         image: alpine/git
         volumeMounts:
@@ -38,7 +29,7 @@ spec:
       - name: filemanager
         image:  filebrowser/filebrowser
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         volumeMounts:
           - name: filemanager-data-volume
             mountPath: /srv
@@ -50,8 +41,6 @@ spec:
         emptyDir: {}
       - name: filemanager-database-volume
         emptyDir: {}
-      - name: filemanager-json-volume
-        emptyDir: {}          
 ---
 apiVersion: v1
 kind: Service
@@ -63,7 +52,7 @@ spec:
     app: filemanager
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -85,7 +74,7 @@ spec:
           service:
             name: filemanager-service
             port:
-              number: 8080
+              number: 80
   tls:
   - hosts: 
     - fm.jpto.dev
