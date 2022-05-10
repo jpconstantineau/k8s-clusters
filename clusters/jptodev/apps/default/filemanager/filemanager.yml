@@ -25,8 +25,10 @@ spec:
             mountPath: /srv
           - name: filemanager-database-volume
             mountPath: /database.db  
+            subPath: database.db
           - name: filemanager-json-volume
             mountPath: /.filebrowser.json
+            subPath: .filebrowser.json
       volumes:
       - name: filemanager-data-volume
         emptyDir: {}
