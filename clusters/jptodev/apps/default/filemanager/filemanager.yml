@@ -25,6 +25,15 @@ spec:
         - sh
         - -c
         - touch /tmp/.filebrowser.json
+      - name: busybox
+        image: alpine/git
+        volumeMounts:
+          - name: filemanager-database-volume
+            mountPath: /tmp
+        command:
+        - sh
+        - -c
+        - touch /tmp/database.db
       containers:
       - name: filemanager
         image:  filebrowser/filebrowser
