@@ -26,8 +26,6 @@ class default{
     +filemanager (fm.jpto.dev)
     +mechmarket (mechmarket.jpconstantineau.com)
     +store (store.jpconstantineau.com)
-    -echo-server (echo-server.$SECRET_DOMAIN3)
-    -hajimari (hajimari.$SECRET_DOMAIN3)
 }
 class kubesystem{
     metrics-server
@@ -54,14 +52,14 @@ class certmanager{
 
 ``` mermaid
 flowchart TD
-    node1 --> node2
-    node1 --> node3
+    node1 <-.-> node2
+    node1 <-.-> node3
     node1(10.0.0.235)
     node2(10.0.0.24)
     node3(10.0.0.213)
 
     nodea <-.-> nodeb
-    nodea --> nodec
+    nodea <-.-> nodec
     nodea(OCI3-0)
     nodeb(OCI3-1 ?)
     nodec(OCI3-2 ?)
