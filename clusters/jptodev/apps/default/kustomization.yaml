@@ -5,4 +5,5 @@ resources:
   - bike
   - store
   - filemanager
+  - echo-server
 
