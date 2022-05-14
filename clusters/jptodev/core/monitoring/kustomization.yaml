@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: crds
   path: ./manifests/monitoring/kube-prometheus-stack
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: monitoring
