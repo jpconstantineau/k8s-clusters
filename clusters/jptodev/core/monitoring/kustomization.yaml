@@ -2,14 +2,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: monitoring
+  name: monitoring-stack
   namespace: flux-system
 spec:
-  interval: 60m0s
-  dependsOn:
-    - name: crds
+  healthChecks:
+  - kind: Deployment
+    name: kube-prometheus-stack-operator
+    namespace: monitoring
+  - kind: Deployment
+    name: kube-prometheus-stack-grafana
+    namespace: monitoring
+  interval: 1h0m0s
   path: ./manifests/monitoring/kube-prometheus-stack
   prune: true
   sourceRef:
     kind: GitRepository
     name: monitoring
+  timeout: 2m0s
+   
